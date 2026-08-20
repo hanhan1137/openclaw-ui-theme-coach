@@ -1,7 +1,7 @@
 ---
 name: openclaw-ui-theme-coach
 description: 引导式 UI 主题设计顾问：通过问答引导帮用户定制任意风格的 OpenClaw Control UI 主题（像素/赛博朋克/卡通/极简/暗色科技等），含主色派生调色板、双保险注入、升级自愈（cron+快照）与反馈学习循环。触发词：主题、换皮、皮肤、UI 美化、风格。
-version: 1.4.0
+version: 1.4.1
 emoji: 🎨
 categories: [theme, ui-customization, design]
 tags: [theme, control-ui, pixel, cyberpunk, accessibility, palette]
@@ -13,7 +13,7 @@ tags: [theme, control-ui, pixel, cyberpunk, accessibility, palette]
 > 五大能力：通用方法论、风格技术库、自助检索、升级自愈、反馈学习。
 
 ## 何时使用
-- 用户想让 OpenClaw 聊天界面（Control UI）变成某个风格：像素/MC、赛博/霓虹、卡通/可爱、极简/现代、暗色科技……
+- 用户想让某个 AI/Web 界面变成某个风格：OpenClaw Control UI、**DSH web UI（DeepSeek Harness 界面）**、任意 Web 项目/静态稿——像素/MC、赛博/霓虹、卡通/可爱、极简/现代、暗色科技……
 - 关键词：主题、换皮、皮肤、UI 美化、风格
 
 ## 核心哲学
@@ -105,7 +105,7 @@ python3 scripts/derive-palette.py '#7ca843' --light  # 浅色（亮度反转）
 
 | 目标形态 | 判定方式 | 交付形态 |
 |---------|---------|---------|
-| A. 构建产物 index.html（Control UI 即此类：静态入口文件 + 会被升级覆盖） | 目标存在一个会被构建/升级覆盖的静态入口文件 | 3.1 双保险注入 + 备份 + 主题包快照（7.0） |
+| A. 构建产物 index.html（OpenClaw Control UI / **DSH web UI** 即此类：静态入口文件 + 会被升级覆盖） | 目标存在一个会被构建/升级覆盖的静态入口文件 | 3.1 双保险注入 + 备份 + 主题包快照（7.0） |
 | B. 静态原型/设计稿 | 用户只要效果，没有固定宿主 | 直接产出完整 HTML/CSS（单文件或小项目），无需注入 |
 | C. 其他运行时（非 Web/插件体系） | 目标不是浏览器页面 | 只做设计令牌 + 配色方案（第二步产物），实现细节按目标环境调整 |
 
