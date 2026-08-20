@@ -1,7 +1,7 @@
 ---
 name: openclaw-ui-theme-coach
 description: 引导式 UI 主题设计顾问：通过问答引导帮用户定制任意风格的 OpenClaw Control UI 主题（像素/赛博朋克/卡通/极简/暗色科技等），含主色派生调色板、双保险注入、升级自愈（cron+快照）与反馈学习循环。触发词：主题、换皮、皮肤、UI 美化、风格。
-version: 1.3.0
+version: 1.4.0
 emoji: 🎨
 categories: [theme, ui-customization, design]
 tags: [theme, control-ui, pixel, cyberpunk, accessibility, palette]
@@ -19,7 +19,7 @@ tags: [theme, control-ui, pixel, cyberpunk, accessibility, palette]
 ## 核心哲学
 1. **可读性优先**：不挡阅读、不挡点击；好看但挡字的东西砍掉。
 2. **一步步来**：一次改一块，先配色→逐元素→统一打磨。
-3. **版权红线**：优先自绘素材；第三方资源查授权。
+3. **素材责任归属**：skill 内置素材/示范案例必须干净（自绘或已授权），不内置、不下载第三方版权素材进 skill 包；skill 会**帮用户寻找官方/授权素材**（指路：找渠道、给链接、教用法，见第五步·素材指路），下载与存放发生在用户侧——用户个人使用官方素材属合理使用（适用于所有作品）；用户自行发布时，素材授权由用户自行确认。
 4. **注入安全**：改前备份 dist/control-ui/index.html；改完 node --check 验证。
 5. **重启误区**：改静态文件，Ctrl+Shift+R 强制刷新即生效，不用重启网关。
 6. **开放但不盲从**：主动找外部工具，但引入一律过安全门槛。
@@ -29,7 +29,7 @@ tags: [theme, control-ui, pixel, cyberpunk, accessibility, palette]
 
 ## 第一步：问答引导
 一次 2-3 个问题：
-- **风格**：像素/赛博朋克/卡通/极简/暗色科技/拟物？参考 IP？（注意版权）
+- **风格**：像素/赛博朋克/卡通/极简/暗色科技/拟物？参考 IP？（素材用户自备即可，skill 不内置第三方图）
 - **色彩**：主色调？点缀色？深/浅背景？
 - **氛围**：硬核/温馨/趣味/冷静？动画？特殊元素？
 - **可读性**：文字优先清晰（默认必须）。
@@ -253,10 +253,25 @@ python3 scripts/derive-palette.py '#7ca843' --light  # 浅色（亮度反转）
 3. 外部命令：PIL 画纹理、ffmpeg 处理、下载脚本
 4. 让客户 Agent 自己用这套流程找工具
 
+### 素材指路（帮用户找官方内容 · 所有主题通用）
+
+> 用户要某 IP/风格（Hello Kitty、MC、某游戏、某动画等）时，skill 不只自绘——**优先帮用户找到官方/授权素材**。官方渠道通常自带「个人使用授权」（如 Sanrio 官方壁纸专区、IP 官方素材页），比网上野图更干净、还原度更高。
+
+**流程**：
+1. 查该 IP/风格的**官方素材渠道**：官方壁纸/素材专区、授权图库、正版字体/纹理站（web_search + 直接访问官网确认）
+2. 给用户**链接 + 用法说明**（怎么下载、存哪里、怎么自用）
+3. 用户下载后把素材放**本地用户目录**（不进 skill 包）
+4. skill 用**本地路径引用**把它做成背板/装饰/纹理，完成主题
+
+**边界（红线真正的位置）**：
+- ✅ skill 可以**指路**：找渠道、给链接、教用法——这是"帮用户找"，不复制不存储不分发
+- ✅ 用户**个人使用**官方素材 = 合理使用（著作权法第 24 条，适用于所有作品，不限一家公司）
+- ❌ skill **不搬运**：下载的官方素材**不进 skill 包 / 主题包 / 示范案例 / 仓库**（进包 = 公开分发 = 越界；主题包 assets 只放自绘/已授权素材，用户素材放用户侧目录）
+
 ### ⚠️ 安全门槛
 - 第三方 skill：verify 来源/签名 → 内容审查（有无外传数据/危险 shell）→ 用户批准 → 装后验证
 - 任何一条不过就不装，风险讲清楚
-- 不下载执行不明代码；素材授权可商用才用于发布
+- 不下载执行不明代码；skill 不内置第三方版权素材（示范/打包素材须自绘或已授权）；用户自备素材的发布授权由用户自行确认
 
 ---
 
@@ -291,7 +306,7 @@ python3 scripts/derive-palette.py '#7ca843' --light  # 浅色（亮度反转）
 <主题名>-theme/
 ├── theme-vars.html   # :root 变量注入块（带 data-theme-id 指纹）
 ├── injector.html     # 样式注入器（带指纹，见 references/minecraft-example.md）
-├── assets/           # 字体/纹理/图标（授权齐）
+├── assets/           # 字体/纹理/图标（内置素材须自绘或已授权；用户自备素材放用户侧，不打包）
 └── README.md         # 风格说明 + 安装步骤（3.1/3.2·补）+ 对比度实测表
 ```
 
@@ -307,7 +322,7 @@ python3 scripts/derive-palette.py '#7ca843' --light  # 浅色（亮度反转）
 - [ ] README.md 含 2-3 张截图
 - [ ] node --check 所有注入器 JS 通过
 - [ ] 对比度必查配对清单（第四步）全部达标
-- [ ] 第三方素材授权标注完成
+- [ ] 内置素材授权标注完成（自绘/已授权）；用户自备素材的授权由用户发布时自行确认
 - [ ] semver 版本号定好
 - [ ] clawhub skill publish --dry-run 预检通过
 - [ ] frontmatter 按 Agent Skills 标准自查（name 规则 7 条 / description ≤1024 / 缺 description 不加载），清单+自动化脚本见 `references/open-source-checklist.md`
