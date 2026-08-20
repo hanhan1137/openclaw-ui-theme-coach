@@ -280,6 +280,7 @@ python3 scripts/derive-palette.py '#7ca843' --light  # 浅色（亮度反转）
 - [ ] 第三方素材授权标注完成
 - [ ] semver 版本号定好
 - [ ] clawhub skill publish --dry-run 预检通过
+- [ ] frontmatter 按 Agent Skills 标准自查（name 规则 7 条 / description ≤1024 / 缺 description 不加载），清单+自动化脚本见 `references/open-source-checklist.md`
 - [ ] 安全审计：注入代码/素材零外链、字体纹理全部本地化（web 调研/curl 校验属开发期行为，不进注入产物）、无敏感文件读取、无 curl|bash 模式
 
 ### 7.3 版本策略
