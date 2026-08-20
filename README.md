@@ -41,6 +41,7 @@ openclaw-ui-theme-coach/
 ```
 
 ## 版本
+1.3.0 — 环境无关升级（源自 DSH 适配版回合）：新增 3.0 目标环境判定（形态 A 构建产物/B 静态稿/C 其他运行时）+ 7.0 主题包交付标准形态 + 通用设计令牌说明；Control UI 仍是主场景（形态 A），但设计成果可交付任意 Web 项目
 1.2.1 — border 类派生自动对齐 WCAG UI 组件 ≥3:1（深/浅色，任意色相二分对齐不刺眼）+ heal.sh --force 先验目标快照再卸载（快照缺失/契约违反报错退出、不动现有主题，契约检查挪到备份前）
 1.2.0 — derive-palette 浅色模式（--light 亮度反转）+ 非法 hex 友好报错 + 切换/还原工作流文档化（heal.sh --force / uninstall）+ scanAll 递归扫套娃 shadow root + PIL 纹理块状噪声 + feedback.json 统一落点（skill 内 data/）
 1.1.0 — 风格技术库数据化（references/styles/）+ 对比度必查配对清单 + 自愈上游版本比对 + 变量数统一为 20

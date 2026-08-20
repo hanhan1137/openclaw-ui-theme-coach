@@ -1,7 +1,7 @@
 ---
 name: openclaw-ui-theme-coach
 description: 引导式 UI 主题设计顾问：通过问答引导帮用户定制任意风格的 OpenClaw Control UI 主题（像素/赛博朋克/卡通/极简/暗色科技等），含主色派生调色板、双保险注入、升级自愈（cron+快照）与反馈学习循环。触发词：主题、换皮、皮肤、UI 美化、风格。
-version: 1.2.1
+version: 1.3.0
 emoji: 🎨
 categories: [theme, ui-customization, design]
 tags: [theme, control-ui, pixel, cyberpunk, accessibility, palette]
@@ -75,6 +75,8 @@ tags: [theme, control-ui, pixel, cyberpunk, accessibility, palette]
 | `--accent-glow` | 辉光 |
 | `--accent-2` / `--accent-2-muted` / `--accent-2-subtle` | 第二强调色 |
 
+> **通用设计令牌**：这套变量名继承自 OpenClaw Control UI 的令牌约定，但本身是**通用设计令牌**——任何 Web UI 拿到这 20 个变量都能直接消费。目标 UI 用别的变量名时，按语义映射过去即可（如 `--bg`→对方的主背景变量）。这保证了本 skill 的设计成果不只用于 Control UI，也可交付给任意 Web 项目（见 3.0 目标环境判定）。
+
 ### 2.2 主色派生调色板（1 个基色 → 全套变量）
 
 **方法 A：HSL 偏移**（Python 标准库，零依赖）
@@ -96,6 +98,18 @@ python3 scripts/derive-palette.py '#7ca843' --light  # 浅色（亮度反转）
 ---
 
 ## 第三步：通用实现流程
+
+### 3.0 目标环境判定（先问清目标，再选交付形态）
+
+> 通用方法论（v1.3.0 起，源自 DSH 适配版回合）：本 skill 不只服务 OpenClaw Control UI。动手前先判定目标形态，按形态选交付方式：
+
+| 目标形态 | 判定方式 | 交付形态 |
+|---------|---------|---------|
+| A. 构建产物 index.html（Control UI 即此类：静态入口文件 + 会被升级覆盖） | 目标存在一个会被构建/升级覆盖的静态入口文件 | 3.1 双保险注入 + 备份 + 主题包快照（7.0） |
+| B. 静态原型/设计稿 | 用户只要效果，没有固定宿主 | 直接产出完整 HTML/CSS（单文件或小项目），无需注入 |
+| C. 其他运行时（非 Web/插件体系） | 目标不是浏览器页面 | 只做设计令牌 + 配色方案（第二步产物），实现细节按目标环境调整 |
+
+> 本 skill 的主场景 = 形态 A 的 OpenClaw Control UI（注入架构见 3.1，自愈见 3.2）。形态 A 的注入步骤是**通用 Web 技术**，用于其他目标时，注入位置、资源路径必须按实际目标环境核对（备份→注入→验证三件套不变）。
 
 ### 3.1 注入架构（Control UI 是 Lit shadow DOM）
 - CSS 变量（:root）能穿透 shadow DOM → 配色改 :root 全局生效
@@ -268,6 +282,22 @@ python3 scripts/derive-palette.py '#7ca843' --light  # 浅色（亮度反转）
 ---
 
 ## 第七步：发布工程化
+
+### 7.0 主题包结构（交付物标准形态，v1.3.0 起）
+
+> 无论注入到哪个目标（Control UI / 任意 Web 项目），交付物建议打包成标准主题包——它就是「快照的通用化形态」：
+
+```
+<主题名>-theme/
+├── theme-vars.html   # :root 变量注入块（带 data-theme-id 指纹）
+├── injector.html     # 样式注入器（带指纹，见 references/minecraft-example.md）
+├── assets/           # 字体/纹理/图标（授权齐）
+└── README.md         # 风格说明 + 安装步骤（3.1/3.2·补）+ 对比度实测表
+```
+
+- `theme-vars.html` / `injector.html` 与注入目标的内容**逐字节一致**（升级覆盖后靠它重灌）
+- Control UI 场景：快照目录（`~/.openclaw/workspace/theme-coach/snapshot/<主题名>/`）就是主题包的本地落点，两者是同一套东西
+- 形态 B（静态稿）交付时：主题包换成完整 HTML/CSS 项目，其余标准不变
 
 ### 7.1 前端规范
 - frontmatter 已置于**本文件最顶部**（name/description/version/emoji/categories/tags），是发布元数据唯一真源；7.1 不再重复贴 YAML，改字段只改顶部
