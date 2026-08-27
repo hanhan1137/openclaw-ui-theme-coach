@@ -9,6 +9,33 @@
 - 🔁 **反馈学习**：记录用户偏好，越用越贴合
 - 🧠 **自助检索 + 素材指路**：主动 web_search/clawhub 找工具；用户要某 IP/风格时帮找官方/授权素材渠道（给链接+教用法，用户自备自用，skill 不搬运）
 
+## 安装
+
+> **DSH（DeepSeek Harness）用户请用适配版**：[hanhan1137/theme-coach-dsh](https://github.com/hanhan1137/theme-coach-dsh)，安装步骤见其 README。本小节面向 OpenClaw 用户。
+
+### 前提
+- OpenClaw 环境（本 skill 是 OpenClaw 的 skill）
+- ClawHub CLI（clawhub 命令）可用：`clawhub --version` 有输出即 OK
+
+### 方式一：ClawHub 安装（推荐）
+```bash
+clawhub install @hanhan1137/ui-theme-coach
+```
+
+### 方式二：手动安装
+克隆/下载到 OpenClaw 的 skills 目录（默认 `~/.openclaw/workspace/skills/`）：
+```bash
+git clone git@github.com:hanhan1137/openclaw-ui-theme-coach.git ~/.openclaw/workspace/skills/ui-theme-coach
+```
+
+### 验证安装
+```bash
+clawhub list   # 列表里看到 ui-theme-coach = 装好了
+```
+
+### 快速开始
+告诉 Agent：「用 ui-theme-coach 帮我定制一个 <风格> 主题」，跟着问答引导走（风格→色彩→氛围→可读性）。
+
 ## 使用
 1. 告诉 Agent 你想做什么风格的主题
 2. 跟着问答引导走（风格→色彩→氛围→可读性）
