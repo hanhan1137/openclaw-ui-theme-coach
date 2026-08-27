@@ -25,7 +25,7 @@ clawhub install @hanhan1137/ui-theme-coach
 ### 方式二：手动安装
 克隆/下载到 OpenClaw 的 skills 目录（默认 `~/.openclaw/workspace/skills/`）：
 ```bash
-git clone git@github.com:hanhan1137/openclaw-ui-theme-coach.git ~/.openclaw/workspace/skills/ui-theme-coach
+git clone https://github.com/hanhan1137/openclaw-ui-theme-coach.git ~/.openclaw/workspace/skills/ui-theme-coach
 ```
 
 ### 验证安装
